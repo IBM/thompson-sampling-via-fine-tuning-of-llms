@@ -1,0 +1,45 @@
+# Global setting
+results_dir: experiments/tosfit/faq/large/sac
+seed: 0
+
+# Sampling
+system_prompt: You are a helpful assistant.
+prompt: Write an FAQ response to the question "How do I reset my password?". /no_think
+tokenizer: Qwen/Qwen3-8B
+generator: Qwen/Qwen3-8B
+hidden_dim: 4096
+num_samples: 1000
+batch_size: 16
+temperature: 1.0
+max_new_tokens: 512
+
+# Reward feedback
+reward_function: faq
+
+# Reward model
+feature_embedding_model: qwen3_embedding_0.6B_256
+embedding_aggregation: nop
+embedding_dim: 256
+kernel_feature_transformation: normalize-bias
+inverse_pom_activation_exp: inv_vapor_exp
+
+# Bayesian optimization
+bo_batch_size: 1
+n_marginal_likelihood_warmup_steps: 16
+ongoing_marginal_likelihood_maximization: True
+exploration_bonus: 0.0
+nar: 0.01 # essentially zero, but kept nonzero for conditioning
+observe_invalid_generations: True
+
+# variational LITE maximization
+fine_tune_steps/bo_step: 1
+mini_batch_size: 1
+learning_rate: 2.0E-7
+alpha: 0.1
+momentum: 0
+weight_decay: 0
+
+# Weights and Biases
+tags:
+  - FAQ
+notes: ""

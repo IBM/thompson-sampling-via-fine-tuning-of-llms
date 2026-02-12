@@ -1,0 +1,24 @@
+# Control
+results_dir: experiments/baselines/hamiltonian/small/fibo
+
+# Global setting
+seed: 0
+
+# Sampling
+system_prompt: You are conducting Bayesian optimization (Thompson sampling) fully in context. You are provided a list of candidate solutions and the rewards achieved by these solutions. Propose a new distinct solution that maximizes the reward. Your novel candidate solution must be enclosed by <candidate> </candidate>. Never repeat previous solutions. Your search space is over 6-qubit Qiskit quantum circuits.
+prompt: "qc.cx(0, 1)"
+tokenizer: Qwen/Qwen2.5-Coder-1.5B-Instruct
+generator: Qwen/Qwen2.5-Coder-1.5B-Instruct
+num_samples: 1000
+temperature: 1.0
+max_new_tokens: 2048
+
+# Reward feedback
+reward_function: artificial_quantum_hamiltonian
+
+# Weights and Biases
+tags:
+  - artificial_hamiltonian
+  - FIBO
+  - no_func
+notes: ""

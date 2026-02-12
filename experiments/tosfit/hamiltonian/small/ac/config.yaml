@@ -1,0 +1,59 @@
+# Control
+results_dir: experiments/tosfit/hamiltonian/small/ac
+storage_id: Null 
+already_generated: False
+already_evaluated: False
+
+# Global setting
+seed: 0
+
+# Sampling
+system_prompt: Null
+prompt: |-
+ <|fim_prefix|>
+ def circuit():
+     qc = QuantumCircuit(6)
+ <|fim_suffix|>
+     return qc
+ qc = circuit()
+ state = Statevector.from_instruction(qc)
+ <|fim_middle|>
+tokenizer: Qwen/Qwen2.5-Coder-1.5B
+generator: Qwen/Qwen2.5-Coder-1.5B
+hidden_dim: 1536
+num_samples: 1000
+batch_size: 16
+temperature: 1.0
+max_new_tokens: 512
+
+# Reward feedback
+reward_function: artificial_quantum_hamiltonian
+
+# Reward model
+feature_embedding_model: pauli_observables
+embedding_aggregation: nop
+embedding_dim: 211
+kernel_feature_transformation: bias #normalize-bias
+inverse_pom_activation_exp: inv_vapor_exp
+
+# Bayesian optimization
+bo_batch_size: 1
+n_marginal_likelihood_warmup_steps: 16
+ongoing_marginal_likelihood_maximization: True 
+whitening: False
+exploration_bonus: 0.0 # changed to simulate vanilla actor-critic
+nar: 0.01 # essentially zero, but kept nonzero for conditioning
+observe_invalid_generations: True
+
+# variational LITE maximization
+fine_tune_steps/bo_step: 1 
+mini_batch_size: 1
+learning_rate: 5.0E-6
+alpha: 0.0
+momentum: 0
+weight_decay: 0
+
+# Weights and Biases
+tags:
+  - artificial_hamiltonian
+notes: ""

@@ -1,0 +1,50 @@
+# Control
+results_dir: experiments/tosfit/protein/small/tosfit_c=2
+storage_id: Null
+already_generated: False
+already_evaluated: False
+
+# Global setting
+seed: 0
+
+# Sampling
+system_prompt: Null
+prompt: "<|endoftext|>"
+tokenizer: nferruz/ProtGPT2
+generator: nferruz/ProtGPT2
+hidden_dim: 1280
+num_samples: 1000
+batch_size: 16
+temperature: 1.0
+max_new_tokens: 512
+
+# Reward feedback
+reward_function: protein_stability
+
+# Reward model
+feature_embedding_model: token_embedding
+embedding_aggregation: mean
+embedding_dim: 1280
+kernel_feature_transformation: normalize-bias
+inverse_pom_activation_exp: inv_vapor_exp
+
+# Bayesian optimization
+bo_batch_size: 1
+n_marginal_likelihood_warmup_steps: 16
+ongoing_marginal_likelihood_maximization: True 
+exploration_bonus: 4.0
+nar: 0.01 # essentially zero, but kept nonzero for conditioning
+observe_invalid_generations: True
+
+# variational LITE maximization
+fine_tune_steps/bo_step: 2
+mini_batch_size: 1
+learning_rate: 1.0E-5
+alpha: 0.0
+momentum: 0
+weight_decay: 0
+
+# Weights and Biases
+tags:
+  - protein
+notes: ""

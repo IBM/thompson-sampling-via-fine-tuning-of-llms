@@ -1,0 +1,34 @@
+# Control
+results_dir: experiments/baselines/faq/large/fibo
+
+# Global setting
+seed: 0
+
+# Sampling
+system_prompt: You are conducting Bayesian optimization (Thompson sampling) fully in context. You are provided a list of candidate solutions and the rewards achieved by these solutions. Propose a new distinct solution that maximizes the reward. Your novel candidate solution must be enclosed by <candidate> </candidate>. Never repeat previous solutions. Your search space is over FAQ responses to the question "How do I reset my password?". /no_think
+prompt: |- # sampled from Qwen3-1.7B model to seed generation
+ FAQ: How do I reset my password?
+ Q: How do I reset my password?
+ A: To reset your password, follow these steps:
+ Log in to your account (if you have access to the platform or service you're using).
+ Locate the 'Forgot Password' or 'Reset Password' link, usually found in the login form or menu.
+ Enter your email address or username associated with your account.
+ Follow the instructions sent to your email (or the confirmation screen).
+ Complete the password reset process by entering a new password and confirming it.
+ Submit the form to finalize the reset.
+ If you're unable to locate the "Forgot Password" option, contact the support team for assistance.
+tokenizer: Qwen/Qwen3-8B
+generator: Qwen/Qwen3-8B
+num_samples: 1000
+temperature: 1.0
+max_new_tokens: 1024
+top_o: 10
+
+# Reward feedback
+reward_function: faq
+
+# Weights and Biases
+tags:
+  - faq
+  - FIBO
+notes: ""

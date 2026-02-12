@@ -1,0 +1,32 @@
+# Control
+results_dir: experiments/baselines/hamiltonian/small/evo_llm
+
+# Global setting
+seed: 0
+
+# Sampling
+system_prompt: You are conducting evolutionary search in context. You are provided two candidate solutions. Propose a new distinct solution by combining the candidate solutions and mutating the result. Your novel candidate solution must be enclosed by <candidate> </candidate>. Never repeat previous solutions. Your search space is over 6-qubit Qiskit quantum circuits, already prepared with `qc = QuantumCircuit(6)`
+prompt: "qc.cx(0, 1)"
+tokenizer: Qwen/Qwen2.5-Coder-1.5B-Instruct
+generator: Qwen/Qwen2.5-Coder-1.5B-Instruct
+num_samples: 1000
+temperature: 1.0
+max_new_tokens: 2048
+
+# evolutionary search
+operator: 'LLM'
+population_size: 10
+tournament_size: 3
+vocabulary: " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~" # ascii vocabulary
+substitution_rate: 0.05
+indel_rate: 0.01
+
+# Reward feedback
+reward_function: artificial_quantum_hamiltonian
+
+# Weights and Biases
+tags:
+  - artificial_hamiltonian
+  - evolutionary
+  - no_func
+notes: ""

@@ -1,0 +1,31 @@
+# Control
+results_dir: experiments/baselines/protein/large/evo_char
+
+# Global setting
+seed: 0
+
+# Sampling
+system_prompt: You are conducting evolutionary search in context. You are provided two candidate solutions. Propose a new distinct solution by combining the candidate solutions and mutating the result. Your novel candidate solution must be enclosed by <candidate> </candidate>. Never repeat previous solutions. Your search space is over amino acid sequences, with each amino acid represented as a single-letter code./no_think
+prompt: "MINDLLDISRIISGKMTLDRAEVNLTAIARQVVEEQRQAAEAKSIQLLCSTPDTNHYVFG\nDFDRLKQTLWNLLSNAVKFTPSGGTVELELGYNAEGMEVYVKDSGIGIDPAFLPYVFDRF\nRQSDAADSRNYGGLGLGLAIVKHLLDLHEGNVSAQSEGFGKGATFTVLLPLKPLKRELAA\nVNRHTAVQQSAPLNDNLAGMKILIVEDRPDTNEMVSYILEEAGAIVETAESGAAALTSLK\nSYSPDLVLSDIGMPMMDGYEMIEYIREWKTTKGG"
+tokenizer: Qwen/Qwen3-0.6B
+generator: Qwen/Qwen3-0.6B
+num_samples: 1000
+temperature: 1.0
+max_new_tokens: 2048
+
+# evolutionary search
+operator: 'TOKEN_GENETIC'
+population_size: 10
+tournament_size: 3
+vocabulary: "ACDEFGHIKLMNOPQRSTUVWY"
+substitution_rate: 0.05
+indel_rate: 0.01
+
+# Reward feedback
+reward_function: protein_stability
+
+# Weights and Biases
+tags:
+  - protein
+  - evolutionary
+notes: ""
