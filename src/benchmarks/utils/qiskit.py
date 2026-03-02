@@ -61,7 +61,7 @@ def exhaustive_pauli_observables(num_qubits:int, order:int):
                 for pauli_j in ["X", "Y", "Z"]:
                     zz = ["I"] * num_qubits
                     zz[i], zz[j] = pauli_i, pauli_j
-                    obs.append("".join(z))
+                    obs.append("".join(zz))
     return obs
 
 def remove_global_phase(psi: torch.Tensor) -> torch.Tensor:
